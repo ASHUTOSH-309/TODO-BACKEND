@@ -20,7 +20,7 @@ app.post("/todo", async (req, res) => {
     )
     console.log(req.body)
     if (!parsedPayload.success) {
-        res.status(411).json({
+       return  res.status(411).json({
             msg: "You sent the wrong inputs"
         })
     }
@@ -64,7 +64,7 @@ app.put("/completed", async (req, res) => {
 
     //update the status of the todo in db
     // all objects are automatically assigned _id in a mongodb database
-    await todo.update({
+    await todo.updateOne({
         _id: req.body.id,
 
     }, {
@@ -74,9 +74,6 @@ app.put("/completed", async (req, res) => {
     res.json({
         msg: "Todo marked as completed"
     })
-
-
-
 
 })
 
